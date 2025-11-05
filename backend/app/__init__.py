@@ -4,6 +4,8 @@ import logging
 from .config import Config
 from .services.llm_service import LLMService
 from .routes.chat import chat_bp, init_chat_routes
+from .routes.conversations import conversations_bp
+from .database import db, init_db
 
 # Configure logging
 logging.basicConfig(
@@ -19,6 +21,10 @@ def create_app(config_class=Config):
     
     # Enable CORS for frontend communication
     CORS(app)
+
+    #Initialize database
+    init_db(app)
+    logger.info("Database initialized")
     
     # Only initialize LLM in the main process (not the reloader parent)
     import os
@@ -53,6 +59,7 @@ def create_app(config_class=Config):
     
     # Register blueprints
     app.register_blueprint(chat_bp, url_prefix='/api')
+    app.register_blueprint(conversations_bp, url_prefix='/api')
     
     @app.route('/')
     def index():
@@ -62,7 +69,8 @@ def create_app(config_class=Config):
             'endpoints': {
                 'chat': '/api/chat',
                 'health': '/api/health',
-                'models': '/api/chat/models'
+                'models': '/api/chat/models',
+                'conversations': '/api/conversations',
             }
         }
     
