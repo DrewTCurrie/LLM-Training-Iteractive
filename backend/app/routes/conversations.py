@@ -46,7 +46,7 @@ def create_conversation():
         logger.error(f"Error creating conversatoin: {e}")
         return jsonify({"error": str(e)}), 500
     
-@conversations_bp.route("/conversations/<int:conversation_id>", method=["GET"])
+@conversations_bp.route("/conversations/<int:conversation_id>", methods=["GET"])
 def get_conversation(conversation_id):
     """
     Get a specific conversation with all its messages
