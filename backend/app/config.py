@@ -9,6 +9,18 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
     DEBUG = os.getenv("DEBUG", "True") == "True"
 
+    # Database settings
+    BASE_DIR = Path(__file__).parent.parent
+    DATABASE_DIR = BASE_DIR / "data"
+    DATABASE_DIR.mkdir(exist_ok=True)
+
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "DATABASE_URL",
+        f"sqlite:///{DATABASE_DIR / 'webui.db'}"
+    )
+    SQLACHEMY_TRACK_MODIFICATIONS = False
+
+
     # Model settings
     BASE_DIR = Path(__file__).parent.parent
     MODEL_DIR = BASE_DIR / "models"
