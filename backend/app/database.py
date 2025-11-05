@@ -53,9 +53,9 @@ class Message(db.Model):
                 result['message_metadata'] = None
         return result
     
-    def init_db(app):
-        """Initialize the database"""
-        db.init_app(app)
+def init_db(app):
+    """Initialize the database"""
+    db.init_app(app)
 
-        with app.app_context():
-            db.create_all()
+    with app.app_context():
+        db.create_all()
