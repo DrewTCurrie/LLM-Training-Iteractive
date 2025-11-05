@@ -73,63 +73,63 @@ def chat():
                 db.session.add(conversation)
                 db.session.flush() #Get the ID without committing 
 
-                if stream:
-            # Streaming response
-            def generate():
-                full_response = ""
-                try:
-                    for chunk in llm_service.chat(
-                        messages=messages,
-                        max_tokens=max_tokens,
-                        temperature=temperature,
-                        stream=True,
-                    ):
-                        full_response += chunk
-                        # Send as server-sent events (SSE)
-                        yield f"data: {chunk}\n\n"
-                    
-                    # Save conversation after streaming is complete
-                    if save_conversation and conversation:
-                        try:
-                            # Save user message
-                            last_user_msg = next((m for m in reversed(messages) if m["role"] == "user"), None)
-                            if last_user_msg:
-                                user_message = Message(
+            if stream:
+                # Streaming response
+                def generate():
+                    full_response = ""
+                    try:
+                        for chunk in llm_service.chat(
+                            messages=messages,
+                            max_tokens=max_tokens,
+                            temperature=temperature,
+                            stream=True,
+                        ):
+                            full_response += chunk
+                            # Send as server-sent events (SSE)
+                            yield f"data: {chunk}\n\n"
+                        
+                        # Save conversation after streaming is complete
+                        if save_conversation and conversation:
+                            try:
+                                # Save user message
+                                last_user_msg = next((m for m in reversed(messages) if m["role"] == "user"), None)
+                                if last_user_msg:
+                                    user_message = Message(
+                                        conversation_id=conversation.id,
+                                        role="user",
+                                        content=last_user_msg["content"]
+                                    )
+                                    db.session.add(user_message)
+                                
+                                # Save assistant response
+                                assistant_message = Message(
                                     conversation_id=conversation.id,
-                                    role="user",
-                                    content=last_user_msg["content"]
+                                    role="assistant",
+                                    content=full_response
                                 )
-                                db.session.add(user_message)
-                            
-                            # Save assistant response
-                            assistant_message = Message(
-                                conversation_id=conversation.id,
-                                role="assistant",
-                                content=full_response
-                            )
-                            db.session.add(assistant_message)
-                            
-                            conversation.updated_at = db.func.now()
-                            db.session.commit()
-                            
-                            # Send conversation ID to client
-                            yield f"data: [CONVERSATION_ID:{conversation.id}]\n\n"
-                        except Exception as e:
-                            logger.error(f"Error saving conversation: {e}")
+                                db.session.add(assistant_message)
+                                
+                                conversation.updated_at = db.func.now()
+                                db.session.commit()
+                                
+                                # Send conversation ID to client
+                                yield f"data: [CONVERSATION_ID:{conversation.id}]\n\n"
+                            except Exception as e:
+                                logger.error(f"Error saving conversation: {e}")
+                                db.session.rollback()
+                        
+                        yield "data: [DONE]\n\n"
+                    except Exception as e:
+                        logger.error(f"Streaming error: {e}")
+                        if save_conversation:
                             db.session.rollback()
-                    
-                    yield "data: [DONE]\n\n"
-                except Exception as e:
-                    logger.error(f"Streaming error: {e}")
-                    if save_conversation:
-                        db.session.rollback()
-                    yield f"data: [ERROR: {str(e)}]\n\n"
+                        yield f"data: [ERROR: {str(e)}]\n\n"
 
-            return Response(
-                stream_with_context(generate()),
-                mimetype="text/event-stream",
-                headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
-            )
+                return Response(
+                    stream_with_context(generate()),
+                    mimetype="text/event-stream",
+                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+                )
         else:
             # Non-streaming response
             response = llm_service.chat(
