@@ -1,1 +1,3 @@
 backend/models/*.gguf
+node_modules
+
