@@ -46,9 +46,14 @@ function App() {
   useEffect(() => {
     const ta = inputRef.current;
     if (!ta) return;
-    ta.style.height = '48px';
-    const newHeight = Math.min(ta.scrollHeight, 320);
-    ta.style.height = `${newHeight}px`;
+    // Reset to base height first
+    ta.style.height = '64px';
+
+    // Only adjust height if content actually overflows
+    if (input.length > 0 && ta.scrollHeight > 48){
+      const newHeight = Math.min(ta.scrollheight, 320);
+      ta.style.height = `${newHeight}px`
+    }
   }, [input]);
 
   const measureTextWidth = (text, element) => {
@@ -78,11 +83,6 @@ function App() {
   const handleInputChange = (e) => {
     const ta = e.target;
     setInput(ta.value);
-
-    ta.style.height = '48px';
-    const newHeight = Math.min(ta.scrollHeight, 320);
-    ta.style.height = `${newHeight}px`;
-
     setIsExpanded(evaluateExpanded(ta));
   };
 
@@ -90,9 +90,19 @@ function App() {
     if (input.trim() === '' || isLoading) return;
     const userMessage = { role: 'user', content: input.trim() };
     setMessages((prev) => [...prev, userMessage]);
+    
+    // Reset input and UI state immediately after capturing the message
     setInput('');
-    setIsLoading(true);
     setIsExpanded(false);
+    
+    // Use setTimeout to ensure the reset happens after React updates
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.style.height = '48px';
+      }
+    }, 0);
+    
+    setIsLoading(true);
 
     try {
       const payload = {
@@ -114,7 +124,6 @@ function App() {
       ]);
     } finally {
       setIsLoading(false);
-      if (inputRef.current) inputRef.current.style.height = '48px';
     }
   };
 
