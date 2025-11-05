@@ -1,5 +1,8 @@
 from flask import Blueprint, request, jsonify, Response, stream_with_context
+from ..database import db, Conversation, Message
 import logging
+import json
+
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +44,8 @@ def chat():
         stream = data.get("stream", False)
         max_tokens = data.get("max_tokens", 512)
         temperature = data.get("temperature", 0.7)
+        save_conversation = data.get("save_conversation", False)
+        conversation_id = data.get("conversation_id")
 
         # Validate messages format
         if not isinstance(messages, list) or len(messages) == 0:
@@ -52,9 +57,26 @@ def chat():
                     {"error": "Each message must have role and content"}
                 ), 400
 
-        if stream:
+        #Create or get conversation if saving
+        conversation = None
+        if save_conversation:
+            if conversation_id:
+                conversation = Conversation.query.get(conversation_id)
+                if not conversation: 
+                    return jsonify({"error": "Conversation not found"}), 404
+            else:
+                #Create a new coversation with title from first user message
+                user_msg = next((m for m in messages if m["role"] == "user"), None)
+                title = (user_msg["content"][:50] + "...") if user_msg and len(user_msg["content"]) > 50 else (user_msg["content"] if user_msg else "New Chat")
+
+                conversation = Conversation(title=title)
+                db.session.add(conversation)
+                db.session.flush() #Get the ID without committing 
+
+                if stream:
             # Streaming response
             def generate():
+                full_response = ""
                 try:
                     for chunk in llm_service.chat(
                         messages=messages,
@@ -62,11 +84,45 @@ def chat():
                         temperature=temperature,
                         stream=True,
                     ):
+                        full_response += chunk
                         # Send as server-sent events (SSE)
                         yield f"data: {chunk}\n\n"
+                    
+                    # Save conversation after streaming is complete
+                    if save_conversation and conversation:
+                        try:
+                            # Save user message
+                            last_user_msg = next((m for m in reversed(messages) if m["role"] == "user"), None)
+                            if last_user_msg:
+                                user_message = Message(
+                                    conversation_id=conversation.id,
+                                    role="user",
+                                    content=last_user_msg["content"]
+                                )
+                                db.session.add(user_message)
+                            
+                            # Save assistant response
+                            assistant_message = Message(
+                                conversation_id=conversation.id,
+                                role="assistant",
+                                content=full_response
+                            )
+                            db.session.add(assistant_message)
+                            
+                            conversation.updated_at = db.func.now()
+                            db.session.commit()
+                            
+                            # Send conversation ID to client
+                            yield f"data: [CONVERSATION_ID:{conversation.id}]\n\n"
+                        except Exception as e:
+                            logger.error(f"Error saving conversation: {e}")
+                            db.session.rollback()
+                    
                     yield "data: [DONE]\n\n"
                 except Exception as e:
                     logger.error(f"Streaming error: {e}")
+                    if save_conversation:
+                        db.session.rollback()
                     yield f"data: [ERROR: {str(e)}]\n\n"
 
             return Response(
@@ -83,15 +139,49 @@ def chat():
                 stream=False,
             )
 
-            return jsonify(
-                {
+            #Save conversation if requested
+            if save_conversation and conversation:
+                try:
+                    # Save user message
+                    last_user_msg = next((m for m in reversed(messages) if m["role"] == "user"), None)
+                    if last_user_msg:
+                        user_message = Message(
+                            conversation_id=conversation.id,
+                            role="user",
+                            content=last_user_msg["content"]
+                        )
+                        db.session.add(user_message)
+
+                    #Save assistant response
+                    assistant_message = Message(
+                        conversation_id=conversation.id,
+                        role="assistant",
+                        content=response["text"],
+                        metadata=json.dumps({"tokens_used": response.get("tokens_used", 0)})
+                    )
+
+                    db.session.add(assistant_message)
+
+                    conversation.updated_at = db.func.now()
+                    db.session.commit()
+                except Exception as e:
+                    logger.error(f"Error saving conversation: {e}")
+                    db.session.rollback()
+                
+                result = {
                     "message": {"role": "assistant", "content": response["text"]},
-                    "tokens_used": response.get("tokens_used", 0),
+                    "tokens_used": response.get("tokens_used",0)
                 }
-            )
+
+                if save_conversation and conversation:
+                    result["conversation_id"] = conversation.id
+                
+                return jsonify(result)
 
     except Exception as e:
         logger.error(f"Chat endpoint error: {e}")
+        if save_conversation:
+            db.session.rollback()        
         return jsonify({"error": str(e)}), 500
 
 
