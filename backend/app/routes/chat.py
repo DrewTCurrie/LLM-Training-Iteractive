@@ -3,7 +3,6 @@ from ..database import db, Conversation, Message
 import logging
 import json
 
-
 logger = logging.getLogger(__name__)
 
 chat_bp = Blueprint("chat", __name__)
@@ -22,6 +21,7 @@ def init_chat_routes(service):
 def chat():
     """
     Chat endpoint that accepts messages and returns AI responses
+    Optionally saves the conversation to database
 
     Request body:
     {
@@ -29,12 +29,18 @@ def chat():
             {"role": "system", "content": "You are a helpful assistant"},
             {"role": "user", "content": "Hello!"}
         ],
+        "conversation_id": 1,  // optional, creates new if not provided
+        "save_conversation": true,  // optional, default false
         "stream": false,
         "max_tokens": 512,
         "temperature": 0.7
     }
     """
     try:
+        # Check if LLM service is available
+        if llm_service is None:
+            return jsonify({"error": "LLM service not initialized"}), 503
+        
         data = request.get_json()
 
         if not data or "messages" not in data:
@@ -57,79 +63,79 @@ def chat():
                     {"error": "Each message must have role and content"}
                 ), 400
 
-        #Create or get conversation if saving
+        # Create or get conversation if saving
         conversation = None
         if save_conversation:
             if conversation_id:
                 conversation = Conversation.query.get(conversation_id)
-                if not conversation: 
+                if not conversation:
                     return jsonify({"error": "Conversation not found"}), 404
             else:
-                #Create a new coversation with title from first user message
+                # Create new conversation with title from first user message
                 user_msg = next((m for m in messages if m["role"] == "user"), None)
                 title = (user_msg["content"][:50] + "...") if user_msg and len(user_msg["content"]) > 50 else (user_msg["content"] if user_msg else "New Chat")
-
+                
                 conversation = Conversation(title=title)
                 db.session.add(conversation)
-                db.session.flush() #Get the ID without committing 
-
-            if stream:
-                # Streaming response
-                def generate():
-                    full_response = ""
-                    try:
-                        for chunk in llm_service.chat(
-                            messages=messages,
-                            max_tokens=max_tokens,
-                            temperature=temperature,
-                            stream=True,
-                        ):
-                            full_response += chunk
-                            # Send as server-sent events (SSE)
-                            yield f"data: {chunk}\n\n"
-                        
-                        # Save conversation after streaming is complete
-                        if save_conversation and conversation:
-                            try:
-                                # Save user message
-                                last_user_msg = next((m for m in reversed(messages) if m["role"] == "user"), None)
-                                if last_user_msg:
-                                    user_message = Message(
-                                        conversation_id=conversation.id,
-                                        role="user",
-                                        content=last_user_msg["content"]
-                                    )
-                                    db.session.add(user_message)
-                                
-                                # Save assistant response
-                                assistant_message = Message(
+                db.session.flush()  # Get the ID without committing
+        
+        if stream:
+            # Streaming response
+            def generate():
+                full_response = ""
+                try:
+                    for chunk in llm_service.chat(
+                        messages=messages,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
+                        stream=True,
+                    ):
+                        full_response += chunk
+                        # Send as server-sent events (SSE)
+                        yield f"data: {chunk}\n\n"
+                    
+                    # Save conversation after streaming is complete
+                    if save_conversation and conversation:
+                        try:
+                            # Save user message
+                            last_user_msg = next((m for m in reversed(messages) if m["role"] == "user"), None)
+                            if last_user_msg:
+                                user_message = Message(
                                     conversation_id=conversation.id,
-                                    role="assistant",
-                                    content=full_response
+                                    role="user",
+                                    content=last_user_msg["content"]
                                 )
-                                db.session.add(assistant_message)
-                                
-                                conversation.updated_at = db.func.now()
-                                db.session.commit()
-                                
-                                # Send conversation ID to client
-                                yield f"data: [CONVERSATION_ID:{conversation.id}]\n\n"
-                            except Exception as e:
-                                logger.error(f"Error saving conversation: {e}")
-                                db.session.rollback()
-                        
-                        yield "data: [DONE]\n\n"
-                    except Exception as e:
-                        logger.error(f"Streaming error: {e}")
-                        if save_conversation:
+                                db.session.add(user_message)
+                            
+                            # Save assistant response
+                            assistant_message = Message(
+                                conversation_id=conversation.id,
+                                role="assistant",
+                                content=full_response
+                            )
+                            db.session.add(assistant_message)
+                            
+                            conversation.updated_at = db.func.now()
+                            db.session.commit()
+                            
+                            # Send conversation ID to client
+                            yield f"data: [CONVERSATION_ID:{conversation.id}]\n\n"
+                        except Exception as e:
+                            logger.error(f"Error saving conversation: {e}")
                             db.session.rollback()
-                        yield f"data: [ERROR: {str(e)}]\n\n"
+                    
+                    yield "data: [DONE]\n\n"
+                except Exception as e:
+                    logger.error(f"Streaming error: {e}")
+                    if save_conversation:
+                        db.session.rollback()
+                    yield f"data: [ERROR: {str(e)}]\n\n"
 
-                return Response(
-                    stream_with_context(generate()),
-                    mimetype="text/event-stream",
-                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
-                )
+            return Response(
+                stream_with_context(generate()),
+                mimetype="text/event-stream",
+                headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+            )
         else:
             # Non-streaming response
             response = llm_service.chat(
@@ -139,7 +145,7 @@ def chat():
                 stream=False,
             )
 
-            #Save conversation if requested
+            # Save conversation if requested
             if save_conversation and conversation:
                 try:
                     # Save user message
@@ -151,37 +157,36 @@ def chat():
                             content=last_user_msg["content"]
                         )
                         db.session.add(user_message)
-
-                    #Save assistant response
+                    
+                    # Save assistant response
                     assistant_message = Message(
                         conversation_id=conversation.id,
                         role="assistant",
                         content=response["text"],
                         message_metadata=json.dumps({"tokens_used": response.get("tokens_used", 0)})
                     )
-
                     db.session.add(assistant_message)
-
+                    
                     conversation.updated_at = db.func.now()
                     db.session.commit()
                 except Exception as e:
                     logger.error(f"Error saving conversation: {e}")
                     db.session.rollback()
-                
-                result = {
-                    "message": {"role": "assistant", "content": response["text"]},
-                    "tokens_used": response.get("tokens_used",0)
-                }
 
-                if save_conversation and conversation:
-                    result["conversation_id"] = conversation.id
-                
-                return jsonify(result)
+            result = {
+                "message": {"role": "assistant", "content": response["text"]},
+                "tokens_used": response.get("tokens_used", 0),
+            }
+            
+            if save_conversation and conversation:
+                result["conversation_id"] = conversation.id
+
+            return jsonify(result)
 
     except Exception as e:
         logger.error(f"Chat endpoint error: {e}")
         if save_conversation:
-            db.session.rollback()        
+            db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
 
