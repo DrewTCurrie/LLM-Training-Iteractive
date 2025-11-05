@@ -1,0 +1,6 @@
+Loading .env from: /home/drew/Documents/AI_Hobby/llm-training-platform/backend/.env
+N_GPU_LAYERS from env: None
+ * Serving Flask app 'app'
+ * Debug mode: on
+Loading .env from: /home/drew/Documents/AI_Hobby/llm-training-platform/backend/.env
+N_GPU_LAYERS from env: None

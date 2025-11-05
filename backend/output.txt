@@ -1,0 +1,897 @@
+2025-11-03 21:08:24,261 - app - INFO - Skipping model load in reloader parent process
+Loading .env from: /home/drew/Documents/AI_Hobby/llm-training-platform/backend/.env
+N_GPU_LAYERS from env: None
+ * Serving Flask app 'app'
+ * Debug mode: on
+2025-11-03 21:08:24,272 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.95:5000
+2025-11-03 21:08:24,272 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-03 21:08:24,273 - werkzeug - INFO -  * Restarting with stat
+2025-11-03 21:08:24,496 - app - INFO - Initializing LLM service...
+2025-11-03 21:08:24,496 - app - INFO - Config - N_GPU_LAYERS: -1
+2025-11-03 21:08:24,496 - app - INFO - Config - N_CTX: 8192
+2025-11-03 21:08:24,496 - app - INFO - Config - N_THREADS: 4
+2025-11-03 21:08:24,496 - app - INFO - Config - Model path: /home/drew/Documents/AI_Hobby/llm-training-platform/backend/models/model.gguf
+2025-11-03 21:08:24,496 - app.services.llm_service - INFO - Initializing LLM service with model: /home/drew/Documents/AI_Hobby/llm-training-platform/backend/models/model.gguf
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GeForce RTX 4070 Ti SUPER, compute capability 8.9, VMM: yes
+llama_model_load_from_file_impl: using device CUDA0 (NVIDIA GeForce RTX 4070 Ti SUPER) - 15592 MiB free
+llama_model_loader: loaded meta data with 29 key-value pairs and 399 tensors from /home/drew/Documents/AI_Hobby/llm-training-platform/backend/models/model.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen3
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Ada_Latest_Merged
+llama_model_loader: - kv   3:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   4:                         general.size_label str              = 8.2B
+llama_model_loader: - kv   5:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   6:                               general.tags arr[str,2]       = ["unsloth", "llama.cpp"]
+llama_model_loader: - kv   7:                          qwen3.block_count u32              = 36
+llama_model_loader: - kv   8:                       qwen3.context_length u32              = 40960
+llama_model_loader: - kv   9:                     qwen3.embedding_length u32              = 4096
+llama_model_loader: - kv  10:                  qwen3.feed_forward_length u32              = 12288
+llama_model_loader: - kv  11:                 qwen3.attention.head_count u32              = 32
+llama_model_loader: - kv  12:              qwen3.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  13:                       qwen3.rope.freq_base f32              = 1000000.000000
+llama_model_loader: - kv  14:     qwen3.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  15:                 qwen3.attention.key_length u32              = 128
+llama_model_loader: - kv  16:               qwen3.attention.value_length u32              = 128
+llama_model_loader: - kv  17:                          general.file_type u32              = 7
+llama_model_loader: - kv  18:               general.quantization_version u32              = 2
+llama_model_loader: - kv  19:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  20:                         tokenizer.ggml.pre str              = qwen2
+llama_model_loader: - kv  21:                      tokenizer.ggml.tokens arr[str,151936]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  22:                  tokenizer.ggml.token_type arr[i32,151936]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  23:                      tokenizer.ggml.merges arr[str,151387]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  24:                tokenizer.ggml.eos_token_id u32              = 151645
+llama_model_loader: - kv  25:            tokenizer.ggml.padding_token_id u32              = 151643
+llama_model_loader: - kv  26:                tokenizer.ggml.bos_token_id u32              = 151643
+llama_model_loader: - kv  27:               tokenizer.ggml.add_bos_token bool             = false
+llama_model_loader: - kv  28:                    tokenizer.chat_template str              = \n{%- if tools %}\n    {{- '<|im_start|...
+llama_model_loader: - type  f32:  145 tensors
+llama_model_loader: - type q8_0:  254 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q8_0
+print_info: file size   = 8.11 GiB (8.50 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: control token: 151660 '<|fim_middle|>' is not marked as EOG
+load: control token: 151659 '<|fim_prefix|>' is not marked as EOG
+load: control token: 151653 '<|vision_end|>' is not marked as EOG
+load: control token: 151648 '<|box_start|>' is not marked as EOG
+load: control token: 151646 '<|object_ref_start|>' is not marked as EOG
+load: control token: 151649 '<|box_end|>' is not marked as EOG
+load: control token: 151655 '<|image_pad|>' is not marked as EOG
+load: control token: 151651 '<|quad_end|>' is not marked as EOG
+load: control token: 151647 '<|object_ref_end|>' is not marked as EOG
+load: control token: 151652 '<|vision_start|>' is not marked as EOG
+load: control token: 151654 '<|vision_pad|>' is not marked as EOG
+load: control token: 151656 '<|video_pad|>' is not marked as EOG
+load: control token: 151644 '<|im_start|>' is not marked as EOG
+load: control token: 151661 '<|fim_suffix|>' is not marked as EOG
+load: control token: 151650 '<|quad_start|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 151643 ('<|endoftext|>')
+load:   - 151645 ('<|im_end|>')
+load:   - 151662 ('<|fim_pad|>')
+load:   - 151663 ('<|repo_name|>')
+load:   - 151664 ('<|file_sep|>')
+load: special tokens cache size = 26
+load: token to piece cache size = 0.9311 MB
+print_info: arch             = qwen3
+print_info: vocab_only       = 0
+print_info: n_ctx_train      = 40960
+print_info: n_embd           = 4096
+print_info: n_layer          = 36
+print_info: n_head           = 32
+print_info: n_head_kv        = 8
+print_info: n_rot            = 128
+print_info: n_swa            = 0
+print_info: is_swa_any       = 0
+print_info: n_embd_head_k    = 128
+print_info: n_embd_head_v    = 128
+print_info: n_gqa            = 4
+print_info: n_embd_k_gqa     = 1024
+print_info: n_embd_v_gqa     = 1024
+print_info: f_norm_eps       = 0.0e+00
+print_info: f_norm_rms_eps   = 1.0e-06
+print_info: f_clamp_kqv      = 0.0e+00
+print_info: f_max_alibi_bias = 0.0e+00
+print_info: f_logit_scale    = 0.0e+00
+print_info: f_attn_scale     = 0.0e+00
+print_info: n_ff             = 12288
+print_info: n_expert         = 0
+print_info: n_expert_used    = 0
+print_info: causal attn      = 1
+print_info: pooling type     = -1
+print_info: rope type        = 2
+print_info: rope scaling     = linear
+print_info: freq_base_train  = 1000000.0
+print_info: freq_scale_train = 1
+print_info: n_ctx_orig_yarn  = 40960
+print_info: rope_finetuned   = unknown
+print_info: model type       = 8B
+print_info: model params     = 8.19 B
+print_info: general.name     = Ada_Latest_Merged
+print_info: vocab type       = BPE
+print_info: n_vocab          = 151936
+print_info: n_merges         = 151387
+print_info: BOS token        = 151643 '<|endoftext|>'
+print_info: EOS token        = 151645 '<|im_end|>'
+print_info: EOT token        = 151645 '<|im_end|>'
+print_info: PAD token        = 151643 '<|endoftext|>'
+print_info: LF token         = 198 'Ċ'
+print_info: FIM PRE token    = 151659 '<|fim_prefix|>'
+print_info: FIM SUF token    = 151661 '<|fim_suffix|>'
+print_info: FIM MID token    = 151660 '<|fim_middle|>'
+print_info: FIM PAD token    = 151662 '<|fim_pad|>'
+print_info: FIM REP token    = 151663 '<|repo_name|>'
+print_info: FIM SEP token    = 151664 '<|file_sep|>'
+print_info: EOG token        = 151643 '<|endoftext|>'
+print_info: EOG token        = 151645 '<|im_end|>'
+print_info: EOG token        = 151662 '<|fim_pad|>'
+print_info: EOG token        = 151663 '<|repo_name|>'
+print_info: EOG token        = 151664 '<|file_sep|>'
+print_info: max token length = 256
+load_tensors: loading model tensors, this can take a while... (mmap = true)
+load_tensors: layer   0 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   1 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   2 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   3 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   4 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   5 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   6 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   7 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   8 assigned to device CUDA0, is_swa = 0
+load_tensors: layer   9 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  10 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  11 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  12 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  13 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  14 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  15 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  16 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  17 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  18 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  19 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  20 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  21 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  22 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  23 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  24 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  25 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  26 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  27 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  28 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  29 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  30 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  31 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  32 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  33 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  34 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  35 assigned to device CUDA0, is_swa = 0
+load_tensors: layer  36 assigned to device CUDA0, is_swa = 0
+load_tensors: tensor 'token_embd.weight' (q8_0) (and 0 others) cannot be used with preferred buffer type CUDA_Host, using CPU instead
+load_tensors: offloading 36 repeating layers to GPU
+load_tensors: offloading output layer to GPU
+load_tensors: offloaded 37/37 layers to GPU
+load_tensors:        CUDA0 model buffer size =  7669.77 MiB
+load_tensors:   CPU_Mapped model buffer size =   630.59 MiB
+.......................................................................................
+llama_context: constructing llama_context
+llama_context: n_seq_max     = 1
+llama_context: n_ctx         = 8192
+llama_context: n_ctx_per_seq = 8192
+llama_context: n_batch       = 512
+llama_context: n_ubatch      = 512
+llama_context: causal_attn   = 1
+llama_context: flash_attn    = 0
+llama_context: kv_unified    = false
+llama_context: freq_base     = 1000000.0
+llama_context: freq_scale    = 1
+llama_context: n_ctx_per_seq (8192) < n_ctx_train (40960) -- the full capacity of the model will not be utilized
+set_abort_callback: call
+llama_context:  CUDA_Host  output buffer size =     0.58 MiB
+create_memory: n_ctx = 8192 (padded)
+llama_kv_cache_unified: layer   0: dev = CUDA0
+llama_kv_cache_unified: layer   1: dev = CUDA0
+llama_kv_cache_unified: layer   2: dev = CUDA0
+llama_kv_cache_unified: layer   3: dev = CUDA0
+llama_kv_cache_unified: layer   4: dev = CUDA0
+llama_kv_cache_unified: layer   5: dev = CUDA0
+llama_kv_cache_unified: layer   6: dev = CUDA0
+llama_kv_cache_unified: layer   7: dev = CUDA0
+llama_kv_cache_unified: layer   8: dev = CUDA0
+llama_kv_cache_unified: layer   9: dev = CUDA0
+llama_kv_cache_unified: layer  10: dev = CUDA0
+llama_kv_cache_unified: layer  11: dev = CUDA0
+llama_kv_cache_unified: layer  12: dev = CUDA0
+llama_kv_cache_unified: layer  13: dev = CUDA0
+llama_kv_cache_unified: layer  14: dev = CUDA0
+llama_kv_cache_unified: layer  15: dev = CUDA0
+llama_kv_cache_unified: layer  16: dev = CUDA0
+llama_kv_cache_unified: layer  17: dev = CUDA0
+llama_kv_cache_unified: layer  18: dev = CUDA0
+llama_kv_cache_unified: layer  19: dev = CUDA0
+llama_kv_cache_unified: layer  20: dev = CUDA0
+llama_kv_cache_unified: layer  21: dev = CUDA0
+llama_kv_cache_unified: layer  22: dev = CUDA0
+llama_kv_cache_unified: layer  23: dev = CUDA0
+llama_kv_cache_unified: layer  24: dev = CUDA0
+llama_kv_cache_unified: layer  25: dev = CUDA0
+llama_kv_cache_unified: layer  26: dev = CUDA0
+llama_kv_cache_unified: layer  27: dev = CUDA0
+llama_kv_cache_unified: layer  28: dev = CUDA0
+llama_kv_cache_unified: layer  29: dev = CUDA0
+llama_kv_cache_unified: layer  30: dev = CUDA0
+llama_kv_cache_unified: layer  31: dev = CUDA0
+llama_kv_cache_unified: layer  32: dev = CUDA0
+llama_kv_cache_unified: layer  33: dev = CUDA0
+llama_kv_cache_unified: layer  34: dev = CUDA0
+llama_kv_cache_unified: layer  35: dev = CUDA0
+llama_kv_cache_unified:      CUDA0 KV buffer size =  1152.00 MiB
+llama_kv_cache_unified: size = 1152.00 MiB (  8192 cells,  36 layers,  1/1 seqs), K (f16):  576.00 MiB, V (f16):  576.00 MiB
+llama_context: enumerating backends
+llama_context: backend_ptrs.size() = 2
+llama_context: max_nodes = 3192
+llama_context: worst-case: n_tokens = 512, n_seqs = 1, n_outputs = 0
+graph_reserve: reserving a graph for ubatch with n_tokens =  512, n_seqs =  1, n_outputs =  512
+graph_reserve: reserving a graph for ubatch with n_tokens =    1, n_seqs =  1, n_outputs =    1
+graph_reserve: reserving a graph for ubatch with n_tokens =  512, n_seqs =  1, n_outputs =  512
+llama_context:      CUDA0 compute buffer size =   564.01 MiB
+llama_context:  CUDA_Host compute buffer size =    28.01 MiB
+llama_context: graph nodes  = 1410
+llama_context: graph splits = 2
+CUDA : ARCHS = 890 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+Model metadata: {'tokenizer.ggml.add_bos_token': 'false', 'tokenizer.ggml.bos_token_id': '151643', 'tokenizer.ggml.padding_token_id': '151643', 'tokenizer.ggml.eos_token_id': '151645', 'general.file_type': '7', 'qwen3.attention.value_length': '128', 'qwen3.attention.key_length': '128', 'general.architecture': 'qwen3', 'tokenizer.chat_template': '\n{%- if tools %}\n    {{- \'<|im_start|>system\n\' }}\n    {%- if messages[0].role == \'system\' %}\n        {{- messages[0].content + \'\n\n\' }}\n    {%- endif %}\n    {{- "# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>" }}\n    {%- for tool in tools %}\n        {{- "\n" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- "\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\\"name\\": <function-name>, \\"arguments\\": <args-json-object>}\n</tool_call><|im_end|>\n" }}\n{%- else %}\n    {%- if messages[0].role == \'system\' %}\n        {{- \'<|im_start|>system\n\' + messages[0].content + \'<|im_end|>\n\' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for forward_message in messages %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- set message = messages[index] %}\n    {%- set current_content = message.content if message.content is not none else \'\' %}\n    {%- set tool_start = \'<tool_response>\' %}\n    {%- set tool_start_length = tool_start|length %}\n    {%- set start_of_message = current_content[:tool_start_length] %}\n    {%- set tool_end = \'</tool_response>\' %}\n    {%- set tool_end_length = tool_end|length %}\n    {%- set start_pos = (current_content|length) - tool_end_length %}\n    {%- if start_pos < 0 %}\n        {%- set start_pos = 0 %}\n    {%- endif %}\n    {%- set end_of_message = current_content[start_pos:] %}\n    {%- if ns.multi_step_tool and message.role == "user" and not(start_of_message == tool_start and end_of_message == tool_end) %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n{%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == "user") or (message.role == "system" and not loop.first) %}\n        {{- \'<|im_start|>\' + message.role + \'\n\' + message.content + \'<|im_end|>\' + \'\n\' }}\n    {%- elif message.role == "assistant" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content = \'\' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if \'</think>\' in message.content %}\n                {%- set content = (message.content.split(\'</think>\')|last).lstrip(\'\n\') %}\n                {%- set reasoning_content = (message.content.split(\'</think>\')|first).rstrip(\'\n\') %}\n                {%- set reasoning_content = (reasoning_content.split(\'<think>\')|last).lstrip(\'\n\') %}\n            {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last or (not loop.last and reasoning_content) %}\n                {{- \'<|im_start|>\' + message.role + \'\n<think>\n\' + reasoning_content.strip(\'\n\') + \'\n</think>\n\n\' + content.lstrip(\'\n\') }}\n            {%- else %}\n                {{- \'<|im_start|>\' + message.role + \'\n\' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- \'<|im_start|>\' + message.role + \'\n\' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- \'\n\' }}\n                {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {{- \'<tool_call>\n{"name": "\' }}\n                {{- tool_call.name }}\n                {{- \'", "arguments": \' }}\n                {%- if tool_call.arguments is string %}\n                    {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson }}\n                {%- endif %}\n                {{- \'}\n</tool_call>\' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- \'<|im_end|>\n\' }}\n    {%- elif message.role == "tool" %}\n        {%- if loop.first or (messages[loop.index0 - 1].role != "tool") %}\n            {{- \'<|im_start|>user\' }}\n        {%- endif %}\n        {{- \'\n<tool_response>\n\' }}\n        {{- message.content }}\n        {{- \'\n</tool_response>\' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != "tool") %}\n            {{- \'<|im_end|>\n\' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- \'<|im_start|>assistant\n\' }}\n    {%- if enable_thinking is defined and enable_thinking is false %}\n        {{- \'<think>\n\n</think>\n\n\' }}\n    {%- endif %}\n{%- endif %}\n', 'qwen3.context_length': '40960', 'tokenizer.ggml.pre': 'qwen2', 'general.name': 'Ada_Latest_Merged', 'qwen3.attention.head_count_kv': '8', 'qwen3.attention.layer_norm_rms_epsilon': '0.000001', 'general.type': 'model', 'general.size_label': '8.2B', 'qwen3.block_count': '36', 'general.repo_url': 'https://huggingface.co/unsloth', 'qwen3.feed_forward_length': '12288', 'general.quantized_by': 'Unsloth', 'qwen3.rope.freq_base': '1000000.000000', 'qwen3.embedding_length': '4096', 'tokenizer.ggml.model': 'gpt2', 'general.quantization_version': '2', 'qwen3.attention.head_count': '32'}
+Available chat formats from metadata: chat_template.default
+Using gguf chat template: 
+{%- if tools %}
+    {{- '<|im_start|>system
+' }}
+    {%- if messages[0].role == 'system' %}
+        {{- messages[0].content + '
+
+' }}
+    {%- endif %}
+    {{- "# Tools
+
+You may call one or more functions to assist with the user query.
+
+You are provided with function signatures within <tools></tools> XML tags:
+<tools>" }}
+    {%- for tool in tools %}
+        {{- "
+" }}
+        {{- tool | tojson }}
+    {%- endfor %}
+    {{- "
+</tools>
+
+For each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:
+<tool_call>
+{\"name\": <function-name>, \"arguments\": <args-json-object>}
+</tool_call><|im_end|>
+" }}
+{%- else %}
+    {%- if messages[0].role == 'system' %}
+        {{- '<|im_start|>system
+' + messages[0].content + '<|im_end|>
+' }}
+    {%- endif %}
+{%- endif %}
+{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}
+{%- for forward_message in messages %}
+    {%- set index = (messages|length - 1) - loop.index0 %}
+    {%- set message = messages[index] %}
+    {%- set current_content = message.content if message.content is not none else '' %}
+    {%- set tool_start = '<tool_response>' %}
+    {%- set tool_start_length = tool_start|length %}
+    {%- set start_of_message = current_content[:tool_start_length] %}
+    {%- set tool_end = '</tool_response>' %}
+    {%- set tool_end_length = tool_end|length %}
+    {%- set start_pos = (current_content|length) - tool_end_length %}
+    {%- if start_pos < 0 %}
+        {%- set start_pos = 0 %}
+    {%- endif %}
+    {%- set end_of_message = current_content[start_pos:] %}
+    {%- if ns.multi_step_tool and message.role == "user" and not(start_of_message == tool_start and end_of_message == tool_end) %}
+        {%- set ns.multi_step_tool = false %}
+        {%- set ns.last_query_index = index %}
+    {%- endif %}
+{%- endfor %}
+{%- for message in messages %}
+    {%- if (message.role == "user") or (message.role == "system" and not loop.first) %}
+        {{- '<|im_start|>' + message.role + '
+' + message.content + '<|im_end|>' + '
+' }}
+    {%- elif message.role == "assistant" %}
+        {%- set content = message.content %}
+        {%- set reasoning_content = '' %}
+        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}
+            {%- set reasoning_content = message.reasoning_content %}
+        {%- else %}
+            {%- if '</think>' in message.content %}
+                {%- set content = (message.content.split('</think>')|last).lstrip('
+') %}
+                {%- set reasoning_content = (message.content.split('</think>')|first).rstrip('
+') %}
+                {%- set reasoning_content = (reasoning_content.split('<think>')|last).lstrip('
+') %}
+            {%- endif %}
+        {%- endif %}
+        {%- if loop.index0 > ns.last_query_index %}
+            {%- if loop.last or (not loop.last and reasoning_content) %}
+                {{- '<|im_start|>' + message.role + '
+<think>
+' + reasoning_content.strip('
+') + '
+</think>
+
+' + content.lstrip('
+') }}
+            {%- else %}
+                {{- '<|im_start|>' + message.role + '
+' + content }}
+            {%- endif %}
+        {%- else %}
+            {{- '<|im_start|>' + message.role + '
+' + content }}
+        {%- endif %}
+        {%- if message.tool_calls %}
+            {%- for tool_call in message.tool_calls %}
+                {%- if (loop.first and content) or (not loop.first) %}
+                    {{- '
+' }}
+                {%- endif %}
+                {%- if tool_call.function %}
+                    {%- set tool_call = tool_call.function %}
+                {%- endif %}
+                {{- '<tool_call>
+{"name": "' }}
+                {{- tool_call.name }}
+                {{- '", "arguments": ' }}
+                {%- if tool_call.arguments is string %}
+                    {{- tool_call.arguments }}
+                {%- else %}
+                    {{- tool_call.arguments | tojson }}
+                {%- endif %}
+                {{- '}
+</tool_call>' }}
+            {%- endfor %}
+        {%- endif %}
+        {{- '<|im_end|>
+' }}
+    {%- elif message.role == "tool" %}
+        {%- if loop.first or (messages[loop.index0 - 1].role != "tool") %}
+            {{- '<|im_start|>user' }}
+        {%- endif %}
+        {{- '
+<tool_response>
+' }}
+        {{- message.content }}
+        {{- '
+</tool_response>' }}
+        {%- if loop.last or (messages[loop.index0 + 1].role != "tool") %}
+            {{- '<|im_end|>
+' }}
+        {%- endif %}
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|im_start|>assistant
+' }}
+    {%- if enable_thinking is defined and enable_thinking is false %}
+        {{- '<think>
+
+</think>
+
+' }}
+    {%- endif %}
+{%- endif %}
+
+Using chat eos_token: <|im_end|>
+Using chat bos_token: <|endoftext|>
+2025-11-03 21:08:25,886 - app.services.llm_service - INFO - Model loaded successfully
+2025-11-03 21:08:25,886 - app - INFO - LLM service initialized successfully
+2025-11-03 21:08:25,892 - werkzeug - WARNING -  * Debugger is active!
+2025-11-03 21:08:25,893 - werkzeug - INFO -  * Debugger PIN: 250-380-202
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      86.19 ms /    14 tokens (    6.16 ms per token,   162.43 tokens per second)
+llama_perf_context_print:        eval time =    5312.43 ms /   364 runs   (   14.59 ms per token,    68.52 tokens per second)
+llama_perf_context_print:       total time =    5541.82 ms /   378 tokens
+llama_perf_context_print:    graphs reused =        352
+2025-11-03 21:08:58,382 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:08:58] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:09:19,753 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:09:19] "GET /api/health HTTP/1.1" 200 -
+2025-11-03 21:09:25,799 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:09:25] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.37 ms /     7 tokens (    3.62 ms per token,   275.91 tokens per second)
+llama_perf_context_print:        eval time =    1992.42 ms /   138 runs   (   14.44 ms per token,    69.26 tokens per second)
+llama_perf_context_print:       total time =    2048.93 ms /   145 tokens
+llama_perf_context_print:    graphs reused =        133
+2025-11-03 21:09:27,926 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:09:27] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:09:38,855 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:09:38] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 148 prefix-match hit, remaining 15 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      18.76 ms /    15 tokens (    1.25 ms per token,   799.70 tokens per second)
+llama_perf_context_print:        eval time =    2078.66 ms /   142 runs   (   14.64 ms per token,    68.31 tokens per second)
+llama_perf_context_print:       total time =    2131.05 ms /   157 tokens
+llama_perf_context_print:    graphs reused =        137
+2025-11-03 21:09:41,082 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:09:41] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:10:16,455 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:10:16] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 15 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.21 ms /    15 tokens (    1.81 ms per token,   551.27 tokens per second)
+llama_perf_context_print:        eval time =    5769.48 ms /   395 runs   (   14.61 ms per token,    68.46 tokens per second)
+llama_perf_context_print:       total time =    5957.64 ms /   410 tokens
+llama_perf_context_print:    graphs reused =        382
+2025-11-03 21:10:22,482 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:10:22] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:10:29,459 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:10:29] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 8 prefix-match hit, remaining 577 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =     171.90 ms /   577 tokens (    0.30 ms per token,  3356.60 tokens per second)
+llama_perf_context_print:        eval time =    9270.78 ms /   626 runs   (   14.81 ms per token,    67.52 tokens per second)
+llama_perf_context_print:       total time =    9803.57 ms /  1203 tokens
+llama_perf_context_print:    graphs reused =        606
+2025-11-03 21:10:39,327 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:10:39] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:29:07,658 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:29:07] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 6 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.09 ms /     6 tokens (    4.18 ms per token,   239.11 tokens per second)
+llama_perf_context_print:        eval time =    3580.02 ms /   247 runs   (   14.49 ms per token,    68.99 tokens per second)
+llama_perf_context_print:       total time =    3680.51 ms /   253 tokens
+llama_perf_context_print:    graphs reused =        239
+2025-11-03 21:29:11,422 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:29:11] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:29:23,534 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:29:23] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 256 prefix-match hit, remaining 21 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      20.17 ms /    21 tokens (    0.96 ms per token,  1041.20 tokens per second)
+llama_perf_context_print:        eval time =    4299.34 ms /   290 runs   (   14.83 ms per token,    67.45 tokens per second)
+llama_perf_context_print:       total time =    4416.18 ms /   311 tokens
+llama_perf_context_print:    graphs reused =        280
+2025-11-03 21:29:28,113 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:29:28] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:29:55,381 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:29:55] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 4 prefix-match hit, remaining 6 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      26.34 ms /     6 tokens (    4.39 ms per token,   227.79 tokens per second)
+llama_perf_context_print:        eval time =     866.80 ms /    60 runs   (   14.45 ms per token,    69.22 tokens per second)
+llama_perf_context_print:       total time =     904.07 ms /    66 tokens
+llama_perf_context_print:    graphs reused =         57
+2025-11-03 21:29:56,378 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:29:56] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:30:26,583 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:30:26] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 70 prefix-match hit, remaining 17 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.84 ms /    17 tokens (    1.64 ms per token,   610.68 tokens per second)
+llama_perf_context_print:        eval time =    5960.66 ms /   405 runs   (   14.72 ms per token,    67.95 tokens per second)
+llama_perf_context_print:       total time =    6157.61 ms /   422 tokens
+llama_perf_context_print:    graphs reused =        391
+2025-11-03 21:30:32,842 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:30:32] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:33:21,730 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:33:21] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 13 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.51 ms /    13 tokens (    2.12 ms per token,   472.54 tokens per second)
+llama_perf_context_print:        eval time =    3202.68 ms /   221 runs   (   14.49 ms per token,    69.00 tokens per second)
+llama_perf_context_print:       total time =    3293.11 ms /   234 tokens
+llama_perf_context_print:    graphs reused =        213
+2025-11-03 21:33:25,097 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:33:25] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:34:13,028 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:34:13] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 237 prefix-match hit, remaining 54 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      31.19 ms /    54 tokens (    0.58 ms per token,  1731.49 tokens per second)
+llama_perf_context_print:        eval time =    6323.91 ms /   428 runs   (   14.78 ms per token,    67.68 tokens per second)
+llama_perf_context_print:       total time =    6540.18 ms /   482 tokens
+llama_perf_context_print:    graphs reused =        414
+2025-11-03 21:34:19,642 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:34:19] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:35:42,376 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:35:42] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.30 ms /     7 tokens (    3.61 ms per token,   276.72 tokens per second)
+llama_perf_context_print:        eval time =    1197.15 ms /    83 runs   (   14.42 ms per token,    69.33 tokens per second)
+llama_perf_context_print:       total time =    1238.49 ms /    90 tokens
+llama_perf_context_print:    graphs reused =         80
+2025-11-03 21:35:43,692 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:35:43] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:35:50,902 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:35:50] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 93 prefix-match hit, remaining 15 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      18.66 ms /    15 tokens (    1.24 ms per token,   803.64 tokens per second)
+llama_perf_context_print:        eval time =     711.49 ms /    49 runs   (   14.52 ms per token,    68.87 tokens per second)
+llama_perf_context_print:       total time =     738.54 ms /    64 tokens
+llama_perf_context_print:    graphs reused =         47
+2025-11-03 21:35:51,791 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:35:51] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:36:32,054 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:36:32] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 25 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.78 ms /    25 tokens (    1.11 ms per token,   899.90 tokens per second)
+llama_perf_context_print:        eval time =    2915.82 ms /   201 runs   (   14.51 ms per token,    68.93 tokens per second)
+llama_perf_context_print:       total time =    2998.11 ms /   226 tokens
+llama_perf_context_print:    graphs reused =        193
+2025-11-03 21:36:35,122 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:36:35] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:37:08,800 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:37:08] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 16 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.29 ms /    16 tokens (    1.71 ms per token,   586.27 tokens per second)
+llama_perf_context_print:        eval time =    3526.26 ms /   243 runs   (   14.51 ms per token,    68.91 tokens per second)
+llama_perf_context_print:       total time =    3625.96 ms /   259 tokens
+llama_perf_context_print:    graphs reused =        234
+2025-11-03 21:37:12,502 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:37:12] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:39:22,073 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:39:22] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 18 prefix-match hit, remaining 1 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =       0.00 ms /     1 tokens (    0.00 ms per token,      inf tokens per second)
+llama_perf_context_print:        eval time =    2672.75 ms /   184 runs   (   14.53 ms per token,    68.84 tokens per second)
+llama_perf_context_print:       total time =    2719.98 ms /   185 tokens
+llama_perf_context_print:    graphs reused =        177
+2025-11-03 21:39:24,862 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:39:24] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:39:40,951 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:39:40] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 18 prefix-match hit, remaining 1 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =       0.00 ms /     1 tokens (    0.00 ms per token,      inf tokens per second)
+llama_perf_context_print:        eval time =    1838.47 ms /   127 runs   (   14.48 ms per token,    69.08 tokens per second)
+llama_perf_context_print:       total time =    1866.42 ms /   128 tokens
+llama_perf_context_print:    graphs reused =        122
+2025-11-03 21:39:42,889 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:39:42] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:39:55,967 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:39:55] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 145 prefix-match hit, remaining 20 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      19.77 ms /    20 tokens (    0.99 ms per token,  1011.48 tokens per second)
+llama_perf_context_print:        eval time =    3411.97 ms /   232 runs   (   14.71 ms per token,    68.00 tokens per second)
+llama_perf_context_print:       total time =    3499.65 ms /   252 tokens
+llama_perf_context_print:    graphs reused =        224
+2025-11-03 21:39:59,537 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:39:59] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:41:33,059 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:41:33] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 5 prefix-match hit, remaining 5 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      26.13 ms /     5 tokens (    5.23 ms per token,   191.36 tokens per second)
+llama_perf_context_print:        eval time =    2384.03 ms /   165 runs   (   14.45 ms per token,    69.21 tokens per second)
+llama_perf_context_print:       total time =    2450.36 ms /   170 tokens
+llama_perf_context_print:    graphs reused =        159
+2025-11-03 21:41:35,605 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:41:35] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:46:00,585 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:46:00] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 175 prefix-match hit, remaining 34 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      28.95 ms /    34 tokens (    0.85 ms per token,  1174.56 tokens per second)
+llama_perf_context_print:        eval time =    2711.44 ms /   184 runs   (   14.74 ms per token,    67.86 tokens per second)
+llama_perf_context_print:       total time =    2788.22 ms /   218 tokens
+llama_perf_context_print:    graphs reused =        177
+2025-11-03 21:46:03,455 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:46:03] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:59:07,782 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:59:07] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.26 ms /     7 tokens (    3.61 ms per token,   277.12 tokens per second)
+llama_perf_context_print:        eval time =    3477.72 ms /   240 runs   (   14.49 ms per token,    69.01 tokens per second)
+llama_perf_context_print:       total time =    3574.08 ms /   247 tokens
+llama_perf_context_print:    graphs reused =        232
+2025-11-03 21:59:11,435 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:59:11] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 21:59:50,787 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:59:50] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 8 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      26.01 ms /     8 tokens (    3.25 ms per token,   307.62 tokens per second)
+llama_perf_context_print:        eval time =    3142.59 ms /   217 runs   (   14.48 ms per token,    69.05 tokens per second)
+llama_perf_context_print:       total time =    3229.50 ms /   225 tokens
+llama_perf_context_print:    graphs reused =        209
+2025-11-03 21:59:54,094 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 21:59:54] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:06:12,505 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:06:12] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 6 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.03 ms /     6 tokens (    4.17 ms per token,   239.72 tokens per second)
+llama_perf_context_print:        eval time =    2471.94 ms /   171 runs   (   14.46 ms per token,    69.18 tokens per second)
+llama_perf_context_print:       total time =    2540.36 ms /   177 tokens
+llama_perf_context_print:    graphs reused =        165
+2025-11-03 23:06:15,117 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:06:15] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:07:24,728 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:07:24] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.20 ms /     7 tokens (    3.60 ms per token,   277.83 tokens per second)
+llama_perf_context_print:        eval time =    2312.12 ms /   160 runs   (   14.45 ms per token,    69.20 tokens per second)
+llama_perf_context_print:       total time =    2375.87 ms /   167 tokens
+llama_perf_context_print:    graphs reused =        154
+2025-11-03 23:07:27,182 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:07:27] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:17:46,830 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:17:46] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.73 ms /     7 tokens (    3.68 ms per token,   272.08 tokens per second)
+llama_perf_context_print:        eval time =    1413.21 ms /    98 runs   (   14.42 ms per token,    69.35 tokens per second)
+llama_perf_context_print:       total time =    1458.58 ms /   105 tokens
+llama_perf_context_print:    graphs reused =         94
+2025-11-03 23:17:48,366 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:17:48] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:19:34,782 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:19:34] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 6 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.19 ms /     6 tokens (    4.20 ms per token,   238.18 tokens per second)
+llama_perf_context_print:        eval time =    2093.03 ms /   145 runs   (   14.43 ms per token,    69.28 tokens per second)
+llama_perf_context_print:       total time =    2151.59 ms /   151 tokens
+llama_perf_context_print:    graphs reused =        140
+2025-11-03 23:19:37,033 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:19:37] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:20:06,771 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:20:06] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 8 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.85 ms /     8 tokens (    3.23 ms per token,   309.53 tokens per second)
+llama_perf_context_print:        eval time =    4242.68 ms /   292 runs   (   14.53 ms per token,    68.82 tokens per second)
+llama_perf_context_print:       total time =    4365.64 ms /   300 tokens
+llama_perf_context_print:    graphs reused =        282
+2025-11-03 23:20:11,211 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:20:11] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:22:10,109 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:22:10] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 6 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      24.97 ms /     6 tokens (    4.16 ms per token,   240.26 tokens per second)
+llama_perf_context_print:        eval time =    2284.39 ms /   158 runs   (   14.46 ms per token,    69.17 tokens per second)
+llama_perf_context_print:       total time =    2347.51 ms /   164 tokens
+llama_perf_context_print:    graphs reused =        152
+2025-11-03 23:22:12,543 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:22:12] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:24:08,282 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:24:08] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 4 prefix-match hit, remaining 6 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.03 ms /     6 tokens (    4.17 ms per token,   239.69 tokens per second)
+llama_perf_context_print:        eval time =     894.15 ms /    62 runs   (   14.42 ms per token,    69.34 tokens per second)
+llama_perf_context_print:       total time =     930.19 ms /    68 tokens
+llama_perf_context_print:    graphs reused =         59
+2025-11-03 23:24:09,301 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:24:09] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:30:25,548 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:30:25] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 9 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      26.92 ms /     9 tokens (    2.99 ms per token,   334.31 tokens per second)
+llama_perf_context_print:        eval time =    1052.62 ms /    73 runs   (   14.42 ms per token,    69.35 tokens per second)
+llama_perf_context_print:       total time =    1093.08 ms /    82 tokens
+llama_perf_context_print:    graphs reused =         70
+2025-11-03 23:30:26,725 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:30:26] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:41:43,239 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:41:43] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.12 ms /     7 tokens (    3.59 ms per token,   278.65 tokens per second)
+llama_perf_context_print:        eval time =    7468.24 ms /   509 runs   (   14.67 ms per token,    68.16 tokens per second)
+llama_perf_context_print:       total time =    7743.23 ms /   516 tokens
+llama_perf_context_print:    graphs reused =        492
+2025-11-03 23:41:51,074 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:41:51] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:42:06,890 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:42:06] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 4 prefix-match hit, remaining 10 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      21.24 ms /    10 tokens (    2.12 ms per token,   470.72 tokens per second)
+llama_perf_context_print:        eval time =    2167.42 ms /   150 runs   (   14.45 ms per token,    69.21 tokens per second)
+llama_perf_context_print:       total time =    2224.41 ms /   160 tokens
+llama_perf_context_print:    graphs reused =        144
+2025-11-03 23:42:09,193 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:42:09] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:42:24,342 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:42:24] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 164 prefix-match hit, remaining 24 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      20.10 ms /    24 tokens (    0.84 ms per token,  1193.79 tokens per second)
+llama_perf_context_print:        eval time =     776.68 ms /    53 runs   (   14.65 ms per token,    68.24 tokens per second)
+llama_perf_context_print:       total time =     806.03 ms /    77 tokens
+llama_perf_context_print:    graphs reused =         50
+2025-11-03 23:42:25,216 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:42:25] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:43:12,013 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:43:12] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.08 ms /     7 tokens (    3.58 ms per token,   279.13 tokens per second)
+llama_perf_context_print:        eval time =    1384.55 ms /    96 runs   (   14.42 ms per token,    69.34 tokens per second)
+llama_perf_context_print:       total time =    1428.85 ms /   103 tokens
+llama_perf_context_print:    graphs reused =         92
+2025-11-03 23:43:13,518 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:43:13] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:48:45,944 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:48:45] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.04 ms /     7 tokens (    3.58 ms per token,   279.61 tokens per second)
+llama_perf_context_print:        eval time =    1080.13 ms /    75 runs   (   14.40 ms per token,    69.44 tokens per second)
+llama_perf_context_print:       total time =    1119.15 ms /    82 tokens
+llama_perf_context_print:    graphs reused =         72
+2025-11-03 23:48:47,142 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:48:47] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:49:28,779 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:49:28] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 85 prefix-match hit, remaining 26 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      28.04 ms /    26 tokens (    1.08 ms per token,   927.41 tokens per second)
+llama_perf_context_print:        eval time =    7391.86 ms /   502 runs   (   14.72 ms per token,    67.91 tokens per second)
+llama_perf_context_print:       total time =    7662.67 ms /   528 tokens
+llama_perf_context_print:    graphs reused =        485
+2025-11-03 23:49:36,532 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:49:36] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:50:27,624 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:50:27] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 10 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      26.96 ms /    10 tokens (    2.70 ms per token,   370.95 tokens per second)
+llama_perf_context_print:        eval time =    5086.81 ms /   349 runs   (   14.58 ms per token,    68.61 tokens per second)
+llama_perf_context_print:       total time =    5246.59 ms /   359 tokens
+llama_perf_context_print:    graphs reused =        337
+2025-11-03 23:50:32,940 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:50:32] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:50:38,785 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:50:38] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 8 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      17.56 ms /     8 tokens (    2.20 ms per token,   455.53 tokens per second)
+llama_perf_context_print:        eval time =    4981.77 ms /   342 runs   (   14.57 ms per token,    68.65 tokens per second)
+llama_perf_context_print:       total time =    5127.15 ms /   350 tokens
+llama_perf_context_print:    graphs reused =        330
+2025-11-03 23:50:43,982 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:50:43] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:52:26,572 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:52:26] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.46 ms /     7 tokens (    3.64 ms per token,   274.94 tokens per second)
+llama_perf_context_print:        eval time =    1658.92 ms /   115 runs   (   14.43 ms per token,    69.32 tokens per second)
+llama_perf_context_print:       total time =    1708.79 ms /   122 tokens
+llama_perf_context_print:    graphs reused =        111
+2025-11-03 23:52:28,358 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:52:28] "POST /api/chat HTTP/1.1" 200 -
+2025-11-03 23:52:41,224 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:52:41] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 4 prefix-match hit, remaining 5 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      16.64 ms /     5 tokens (    3.33 ms per token,   300.48 tokens per second)
+llama_perf_context_print:        eval time =    1254.39 ms /    87 runs   (   14.42 ms per token,    69.36 tokens per second)
+llama_perf_context_print:       total time =    1288.14 ms /    92 tokens
+llama_perf_context_print:    graphs reused =         84
+2025-11-03 23:52:42,591 - werkzeug - INFO - 127.0.0.1 - - [03/Nov/2025 23:52:42] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:05:25,381 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:05:25] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.05 ms /     7 tokens (    3.58 ms per token,   279.45 tokens per second)
+llama_perf_context_print:        eval time =    2542.40 ms /   176 runs   (   14.45 ms per token,    69.23 tokens per second)
+llama_perf_context_print:       total time =    2611.85 ms /   183 tokens
+llama_perf_context_print:    graphs reused =        170
+2025-11-04 00:05:28,071 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:05:28] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:11:46,563 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:11:46] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 9 prefix-match hit, remaining 1 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =       0.00 ms /     1 tokens (    0.00 ms per token,      inf tokens per second)
+llama_perf_context_print:        eval time =     643.30 ms /    44 runs   (   14.62 ms per token,    68.40 tokens per second)
+llama_perf_context_print:       total time =     650.51 ms /    45 tokens
+llama_perf_context_print:    graphs reused =         42
+2025-11-04 00:11:47,285 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:11:47] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:13:31,178 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:13:31] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 53 prefix-match hit, remaining 25 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.85 ms /    25 tokens (    1.11 ms per token,   897.80 tokens per second)
+llama_perf_context_print:        eval time =    7956.88 ms /   541 runs   (   14.71 ms per token,    67.99 tokens per second)
+llama_perf_context_print:       total time =    8265.21 ms /   566 tokens
+llama_perf_context_print:    graphs reused =        523
+2025-11-04 00:13:39,517 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:13:39] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:22:37,804 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:22:37] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 9 prefix-match hit, remaining 1 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =       0.00 ms /     1 tokens (    0.00 ms per token,      inf tokens per second)
+llama_perf_context_print:        eval time =    1248.87 ms /    86 runs   (   14.52 ms per token,    68.86 tokens per second)
+llama_perf_context_print:       total time =    1265.84 ms /    87 tokens
+llama_perf_context_print:    graphs reused =         83
+2025-11-04 00:22:39,148 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:22:39] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:24:08,162 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:24:08] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 95 prefix-match hit, remaining 21 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      28.07 ms /    21 tokens (    1.34 ms per token,   748.21 tokens per second)
+llama_perf_context_print:        eval time =    4226.47 ms /   288 runs   (   14.68 ms per token,    68.14 tokens per second)
+llama_perf_context_print:       total time =    4350.01 ms /   309 tokens
+llama_perf_context_print:    graphs reused =        278
+2025-11-04 00:24:12,612 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:24:12] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:24:23,787 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:24:23] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 404 prefix-match hit, remaining 20 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      20.08 ms /    20 tokens (    1.00 ms per token,   996.16 tokens per second)
+llama_perf_context_print:        eval time =    3840.05 ms /   260 runs   (   14.77 ms per token,    67.71 tokens per second)
+llama_perf_context_print:       total time =    3941.18 ms /   280 tokens
+llama_perf_context_print:    graphs reused =        251
+2025-11-04 00:24:27,809 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:24:27] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:26:53,045 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:26:53] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 15 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.09 ms /    15 tokens (    1.81 ms per token,   553.67 tokens per second)
+llama_perf_context_print:        eval time =   13502.76 ms /   918 runs   (   14.71 ms per token,    67.99 tokens per second)
+llama_perf_context_print:       total time =   14257.38 ms /   933 tokens
+llama_perf_context_print:    graphs reused =        888
+2025-11-04 00:27:07,377 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:27:07] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:30:03,039 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:30:03] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.10 ms /     7 tokens (    3.59 ms per token,   278.86 tokens per second)
+llama_perf_context_print:        eval time =     777.61 ms /    54 runs   (   14.40 ms per token,    69.44 tokens per second)
+llama_perf_context_print:       total time =     812.00 ms /    61 tokens
+llama_perf_context_print:    graphs reused =         52
+2025-11-04 00:30:03,944 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:30:03] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:30:20,246 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:30:20] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 64 prefix-match hit, remaining 23 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      22.29 ms /    23 tokens (    0.97 ms per token,  1031.67 tokens per second)
+llama_perf_context_print:        eval time =    2826.80 ms /   194 runs   (   14.57 ms per token,    68.63 tokens per second)
+llama_perf_context_print:       total time =    2900.94 ms /   217 tokens
+llama_perf_context_print:    graphs reused =        187
+2025-11-04 00:30:23,229 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:30:23] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:30:37,033 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:30:37] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 281 prefix-match hit, remaining 20 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      19.99 ms /    20 tokens (    1.00 ms per token,  1000.50 tokens per second)
+llama_perf_context_print:        eval time =    1528.03 ms /   103 runs   (   14.84 ms per token,    67.41 tokens per second)
+llama_perf_context_print:       total time =    1569.41 ms /   123 tokens
+llama_perf_context_print:    graphs reused =         99
+2025-11-04 00:30:38,701 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:30:38] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:30:53,429 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:30:53] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 404 prefix-match hit, remaining 16 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      19.00 ms /    16 tokens (    1.19 ms per token,   842.28 tokens per second)
+llama_perf_context_print:        eval time =   12830.55 ms /   865 runs   (   14.83 ms per token,    67.42 tokens per second)
+llama_perf_context_print:       total time =   13502.79 ms /   881 tokens
+llama_perf_context_print:    graphs reused =        837
+2025-11-04 00:31:07,028 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:31:07] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:34:32,455 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:34:32] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 15 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.88 ms /    15 tokens (    1.86 ms per token,   537.94 tokens per second)
+llama_perf_context_print:        eval time =    9908.16 ms /   675 runs   (   14.68 ms per token,    68.13 tokens per second)
+llama_perf_context_print:       total time =   10348.83 ms /   690 tokens
+llama_perf_context_print:    graphs reused =        653
+2025-11-04 00:34:42,944 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:34:42] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:36:13,064 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:36:13] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 693 prefix-match hit, remaining 27 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      29.25 ms /    27 tokens (    1.08 ms per token,   923.14 tokens per second)
+llama_perf_context_print:        eval time =    7369.29 ms /   496 runs   (   14.86 ms per token,    67.31 tokens per second)
+llama_perf_context_print:       total time =    7637.61 ms /   523 tokens
+llama_perf_context_print:    graphs reused =        480
+2025-11-04 00:36:20,774 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:36:20] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:45:16,772 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:45:16] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 7 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      25.40 ms /     7 tokens (    3.63 ms per token,   275.60 tokens per second)
+llama_perf_context_print:        eval time =     866.06 ms /    60 runs   (   14.43 ms per token,    69.28 tokens per second)
+llama_perf_context_print:       total time =     902.52 ms /    67 tokens
+llama_perf_context_print:    graphs reused =         57
+2025-11-04 00:45:17,752 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:45:17] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:49:41,985 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:49:41] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 9 prefix-match hit, remaining 1 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =       0.00 ms /     1 tokens (    0.00 ms per token,      inf tokens per second)
+llama_perf_context_print:        eval time =    2043.89 ms /   141 runs   (   14.50 ms per token,    68.99 tokens per second)
+llama_perf_context_print:       total time =    2076.30 ms /   142 tokens
+llama_perf_context_print:    graphs reused =        136
+2025-11-04 00:49:44,138 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:49:44] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:49:58,160 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:49:58] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 150 prefix-match hit, remaining 20 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      19.77 ms /    20 tokens (    0.99 ms per token,  1011.48 tokens per second)
+llama_perf_context_print:        eval time =     730.18 ms /    50 runs   (   14.60 ms per token,    68.48 tokens per second)
+llama_perf_context_print:       total time =     758.55 ms /    70 tokens
+llama_perf_context_print:    graphs reused =         48
+2025-11-04 00:49:59,000 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:49:59] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:50:10,515 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:50:10] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 220 prefix-match hit, remaining 23 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      19.95 ms /    23 tokens (    0.87 ms per token,  1152.94 tokens per second)
+llama_perf_context_print:        eval time =   11756.84 ms /   795 runs   (   14.79 ms per token,    67.62 tokens per second)
+llama_perf_context_print:       total time =   12332.70 ms /   818 tokens
+llama_perf_context_print:    graphs reused =        769
+2025-11-04 00:50:22,926 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:50:22] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 00:53:14,553 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:53:14] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 1038 prefix-match hit, remaining 28 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      29.88 ms /    28 tokens (    1.07 ms per token,   937.21 tokens per second)
+llama_perf_context_print:        eval time =   17518.95 ms /  1161 runs   (   15.09 ms per token,    66.27 tokens per second)
+llama_perf_context_print:       total time =   18679.61 ms /  1189 tokens
+llama_perf_context_print:    graphs reused =       1124
+2025-11-04 00:53:33,315 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 00:53:33] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 01:00:47,902 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:00:47] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 14 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      27.07 ms /    14 tokens (    1.93 ms per token,   517.25 tokens per second)
+llama_perf_context_print:        eval time =    3027.08 ms /   209 runs   (   14.48 ms per token,    69.04 tokens per second)
+llama_perf_context_print:       total time =    3111.69 ms /   223 tokens
+llama_perf_context_print:    graphs reused =        201
+2025-11-04 01:00:51,091 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:00:51] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 01:10:58,425 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:10:58] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 10 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      26.97 ms /    10 tokens (    2.70 ms per token,   370.81 tokens per second)
+llama_perf_context_print:        eval time =    2558.01 ms /   177 runs   (   14.45 ms per token,    69.19 tokens per second)
+llama_perf_context_print:       total time =    2629.77 ms /   187 tokens
+llama_perf_context_print:    graphs reused =        171
+2025-11-04 01:11:01,134 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:11:01] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 01:11:24,931 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:11:24] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 190 prefix-match hit, remaining 18 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      28.81 ms /    18 tokens (    1.60 ms per token,   624.78 tokens per second)
+llama_perf_context_print:        eval time =    2711.12 ms /   184 runs   (   14.73 ms per token,    67.87 tokens per second)
+llama_perf_context_print:       total time =    2787.88 ms /   202 tokens
+llama_perf_context_print:    graphs reused =        177
+2025-11-04 01:11:27,785 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:11:27] "POST /api/chat HTTP/1.1" 200 -
+2025-11-04 01:14:57,587 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:14:57] "OPTIONS /api/chat HTTP/1.1" 200 -
+Llama.generate: 3 prefix-match hit, remaining 10 prompt tokens to eval
+llama_perf_context_print:        load time =      86.30 ms
+llama_perf_context_print: prompt eval time =      26.91 ms /    10 tokens (    2.69 ms per token,   371.65 tokens per second)
+llama_perf_context_print:        eval time =    3775.30 ms /   260 runs   (   14.52 ms per token,    68.87 tokens per second)
+llama_perf_context_print:       total time =    3883.76 ms /   270 tokens
+llama_perf_context_print:    graphs reused =        251
+2025-11-04 01:15:01,569 - werkzeug - INFO - 127.0.0.1 - - [04/Nov/2025 01:15:01] "POST /api/chat HTTP/1.1" 200 -
+Loading .env from: /home/drew/Documents/AI_Hobby/llm-training-platform/backend/.env
+N_GPU_LAYERS from env: None
