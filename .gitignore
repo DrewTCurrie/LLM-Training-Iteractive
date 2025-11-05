@@ -2,3 +2,5 @@ backend/models/*.gguf
 node_modules/
 package.json
 package-lock.json
+backend/venv/
+*__pycache__*
