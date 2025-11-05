@@ -119,7 +119,7 @@ def add_message(conversation_id):
     {
         "role": "user",
         "content": "Hello!",
-        "metadata": {"tokens": 10} //optional
+        "message_metadata": {"tokens": 10} //optional
     }
     """
 
@@ -130,14 +130,14 @@ def add_message(conversation_id):
         if "role" not in data or "content" not in data:
             return jsonify({"error": "Missing required fields: role, content"}), 400
         
-        metadata = data.get("metadata")
-        metadata_str = json.dumps(metadata) if metadata else None
+        message_metadata = data.get("message_metadata")
+        message_metadata_str = json.dumps(message_metadata) if message_metadata else None
 
         message = Message(
             conversation_id=conversation_id,
             role=data["role"],
             content=data["content"],
-            metadata=metadata_str,
+            message_metadata=message_metadata_str,
         )
 
         db.sessoin.add(message)

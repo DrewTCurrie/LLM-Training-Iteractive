@@ -157,7 +157,7 @@ def chat():
                         conversation_id=conversation.id,
                         role="assistant",
                         content=response["text"],
-                        metadata=json.dumps({"tokens_used": response.get("tokens_used", 0)})
+                        message_metadata=json.dumps({"tokens_used": response.get("tokens_used", 0)})
                     )
 
                     db.session.add(assistant_message)
